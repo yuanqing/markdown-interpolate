@@ -9,10 +9,10 @@ Given the following toy `README.md` file:
 ```md
 # Example
 
-<!-- execute: foo.md -->
+<!-- include: foo.md -->
 <!-- end -->
 
-<!-- include: bar.ts -->
+<!-- execute: bar.ts -->
 <!-- end -->
 ```
 
@@ -47,11 +47,11 @@ This will:
 ```md
 # Example
 
-<!-- execute: foo.ts -->
+<!-- include: foo.md -->
 foo
 <!-- end -->
 
-<!-- include: bar.md -->
+<!-- execute: bar.ts -->
 bar
 <!-- end -->
 ```

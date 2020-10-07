@@ -1,9 +1,9 @@
 # Example
 
-<!-- execute: foo.md -->
+<!-- include: foo.md -->
 foo
 <!-- end -->
 
-<!-- include: bar.ts -->
+<!-- execute: bar.ts -->
 bar
 <!-- end -->
