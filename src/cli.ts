@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as sade from 'sade'
 
-import { markdownInterpolateFiles } from './markdown-interpolate-file'
+import { markdownInterpolateFiles } from './markdown-interpolate-files'
 
 sade('markdown-interpolate-files <pattern>', true)
   .describe('Interpolate files or the output of scripts into Markdown')
