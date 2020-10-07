@@ -1,0 +1,72 @@
+{
+  "name": "markdown-interpolate-files",
+  "version": "0.0.0",
+  "description": "Interpolate files or the output of scripts into Markdown",
+  "keywords": [
+    "docs",
+    "interpolate",
+    "markdown"
+  ],
+  "license": "MIT",
+  "author": "Yuan Qing Lim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/markdown-interpolate-files.git"
+  },
+  "files": [
+    "lib"
+  ],
+  "bin": {
+    "markdown-interpolate-files": "lib/cli.js"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf '*.log' .nyc_output coverage lib",
+    "fix": "eslint --fix 'src/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "lint": "eslint 'src/**/*.ts'",
+    "prepublishOnly": "yarn run clean && yarn run build",
+    "reset": "yarn run clean && rimraf node_modules yarn.lock && yarn install",
+    "start": "ts-node src/cli.ts 'example/README.md'",
+    "test": "yarn run clean && tap 'test/**/*.ts' --coverage-report html --coverage-report text --jobs-auto --no-browser --reporter terse",
+    "watch": "tsc --preserveWatchOutput --watch"
+  },
+  "dependencies": {
+    "execa": "^4.0.3",
+    "find-up": "^5.0.0",
+    "fs-extra": "^9.0.1",
+    "globby": "^11.0.1",
+    "sade": "^1.7.3",
+    "ts-node": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.1",
+    "@types/node": "^14.11.1",
+    "@types/prettier": "^2.1.1",
+    "@types/sade": "^1.7.2",
+    "@types/tap": "^14.10.1",
+    "eslint": "^7.9.0",
+    "eslint-config-yuanqing": "^0.0.3",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "tap": "^14.10.8",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-yuanqing"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint"
+    ]
+  },
+  "prettier": "eslint-config-yuanqing/prettier"
+}
