@@ -1,4 +1,4 @@
-# markdown-interpolate-files [![npm Version](https://img.shields.io/npm/v/markdown-interpolate-files?cacheSeconds=1800)](https://www.npmjs.com/package/markdown-interpolate-files) [![build](https://github.com/yuanqing/markdown-interpolate-files/workflows/build/badge.svg)](https://github.com/yuanqing/markdown-interpolate-files/actions?query=workflow%3Abuild) ![stability experimental](https://img.shields.io/badge/stability-experimental-red)
+# markdown-interpolate-files [![npm Version](https://img.shields.io/npm/v/markdown-interpolate-files?cacheSeconds=1800)](https://www.npmjs.com/package/markdown-interpolate-files) [![build](https://github.com/yuanqing/markdown-interpolate-files/workflows/build/badge.svg)](https://github.com/yuanqing/markdown-interpolate-files/actions?query=workflow%3Abuild)
 
 > Interpolate files or the output of scripts into Markdown
 
