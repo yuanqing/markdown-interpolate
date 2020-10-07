@@ -1,13 +1,13 @@
 import * as fs from 'fs-extra'
 import * as path from 'path'
 
-import { processFile } from './process-file'
+import { executeFile } from './execute-file'
 
-const interpolateRegex = /(<!-- ?start: ?([^ ]+) ?-->\n)[\S\s]*?(\n?<!-- ?end ?-->)/g
+const interpolateRegex = /(<!-- ?(include|execute): ?([^ ]+) ?-->\n)[\S\s]*?(<!-- ?end ?-->)/g
 
 export async function interpolateFiles(
   file: string,
-  rootDirectory: null | string
+  baseDirectory: null | string
 ): Promise<void> {
   const string = await fs.readFile(file, 'utf8')
   const matches = string.matchAll(interpolateRegex)
@@ -23,13 +23,24 @@ export async function interpolateFiles(
     result.push(string.slice(startIndex, match.index))
     result.push(match[1])
     const fileToInterpolate =
-      rootDirectory === null
-        ? path.resolve(path.dirname(file), match[2])
-        : path.resolve(rootDirectory, match[2])
-    result.push(await processFile(fileToInterpolate))
-    result.push(match[3])
+      baseDirectory === null
+        ? path.resolve(path.dirname(file), match[3])
+        : path.resolve(baseDirectory, match[3])
+    if (match[2] === 'include') {
+      result.push(
+        trimTrailingNewline(await fs.readFile(fileToInterpolate, 'utf8'))
+      )
+    } else {
+      result.push(trimTrailingNewline(await executeFile(fileToInterpolate)))
+    }
+    result.push('\n')
+    result.push(match[4])
     startIndex = match.index + match[0].length
   }
   result.push(string.slice(startIndex))
   await fs.writeFile(file, result.join(''))
+}
+
+function trimTrailingNewline(string: string): string {
+  return string.replace(/\n+$/, '')
 }

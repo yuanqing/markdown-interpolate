@@ -5,17 +5,21 @@ import { markdownInterpolateFiles } from './markdown-interpolate-file'
 
 sade('markdown-interpolate-files <pattern>', true)
   .describe('Interpolate files or the output of scripts into Markdown')
-  .option('-r, --root', 'Directory to resolve included files')
-  .example('--root scripts')
+  .option('-b, --base', 'Base directory to resolve files or scripts')
+  .example('--base scripts')
   .action(async function (
     pattern: string,
     options: {
-      root: null | string
+      base: null | string
     }
   ) {
-    await markdownInterpolateFiles(
-      pattern,
-      typeof options.root === 'undefined' ? null : options.root
-    )
+    try {
+      await markdownInterpolateFiles(
+        pattern,
+        typeof options.base === 'undefined' ? null : options.base
+      )
+    } catch (error) {
+      console.error(`markdown-interpolate-files: ${error.message}`) // eslint-disable-line no-console
+    }
   })
   .parse(process.argv)
