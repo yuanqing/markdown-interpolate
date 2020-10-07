@@ -58,7 +58,7 @@ bar
 
 Run `markdown-interpolate-files` again to update the content between each pair of opening/closing HTML comments.
 
-Files/scripts are always resolved *relative to the Markdown file*. Use the `--base` flag to set the base directory to resolve files/scripts.
+Note that files/scripts are always resolved *relative to the Markdown file*. Use the `--base` flag to set the base directory to resolve files/scripts.
 
 ## CLI
 
