@@ -39,8 +39,8 @@ $ npx markdown-interpolate-files README.md
 
 This will:
 
-1. Execute `foo.ts` and interpolate its `stdout` into `README.md`.
-2. Interpolate the contents of `bar.md` into `README.md`.
+1. Interpolate the contents of `foo.md` into `README.md`.
+2. Execute `bar.ts` and interpolate its `stdout` into `README.md`.
 
 `README.md` will then be updated as follows:
 
@@ -56,9 +56,12 @@ bar
 <!-- end -->
 ```
 
-Run `markdown-interpolate-files` again to update the content between each pair of opening/closing HTML comments.
+Run the `markdown-interpolate-files` CLI again to update the content between each pair of opening/closing HTML comments.
 
-Note that files/scripts are always resolved *relative to the Markdown file*. Use the `--base` flag to set the base directory to resolve files/scripts.
+Other usage notes:
+
+- By default, files/scripts are always resolved *relative to the Markdown file*. Use the `--base` flag to set the base directory to resolve files/scripts.
+- Besides `.ts`, other types of scripts (eg. `.js`, `.sh`) can be referenced as well.
 
 ## CLI
 
