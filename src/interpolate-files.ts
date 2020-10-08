@@ -25,7 +25,7 @@ export async function interpolateFiles(
     const fileToInterpolate =
       baseDirectory === null
         ? path.resolve(path.dirname(file), match[3])
-        : path.resolve(baseDirectory, match[3])
+        : path.resolve(process.cwd(), baseDirectory, match[3])
     result.push(
       trimTrailingNewline(
         match[2] === 'include'
