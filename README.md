@@ -1,6 +1,6 @@
 # markdown-interpolate [![npm Version](https://img.shields.io/npm/v/markdown-interpolate?cacheSeconds=1800)](https://www.npmjs.com/package/markdown-interpolate) [![build](https://github.com/yuanqing/markdown-interpolate/workflows/build/badge.svg)](https://github.com/yuanqing/markdown-interpolate/actions?query=workflow%3Abuild)
 
-> Interpolate files or the output of scripts into Markdown
+> Interpolate the output of shell commands into Markdown
 
 ## Usage
 
@@ -9,14 +9,14 @@ Given the following toy `README.md` file:
 ```md
 # Example
 
-<!-- include: foo.md -->
+<!-- markdown-interpolate: cat foo.md -->
 <!-- end -->
 
-<!-- execute: bar.ts -->
-<!-- end -->
+<!-- ```md markdown-interpolate: ts-node bar.ts -->
+<!-- ``` end -->
 ```
 
-…with `foo.md`:
+…with the following `foo.md`:
 
 ```md
 foo
@@ -26,7 +26,7 @@ foo
 
 ```ts
 async function main () {
-  console.log('bar')
+  console.log('# bar')
 }
 main()
 ```
@@ -37,31 +37,29 @@ Do:
 $ npx markdown-interpolate README.md
 ```
 
-This will:
+This will execute the shell commands that follow each `markdown-interpolate:` comment in `README.md`, and insert their `stdout` between the respective pair of HTML comments.
 
-1. Interpolate the contents of `foo.md` into `README.md`.
-2. Execute `bar.ts` and interpolate its `stdout` into `README.md`.
+So, our `README.md` will be updated as follows:
 
-`README.md` will then be updated as follows:
-
-```md
+````md
 # Example
 
-<!-- include: foo.md -->
+<!-- markdown-interpolate: cat foo.md -->
 foo
 <!-- end -->
 
-<!-- execute: bar.ts -->
-bar
-<!-- end -->
+<!-- ```md markdown-interpolate: ts-node bar.ts -->
+```md
+# bar
 ```
+<!-- ``` end -->
+````
 
-Run the `markdown-interpolate` CLI again to update the content between each pair of opening/closing HTML comments.
+See that:
 
-Other usage notes:
+- To include a prefix/suffix line before/after the shell command’s `stdout`, specify a string before the `markdown-interpolate:` and corresponding `end` comment.
 
-- By default, files/scripts are always resolved *relative to the Markdown file*. Use the `--base` flag to set the base directory to resolve files/scripts.
-- Besides `.ts`, other types of scripts (eg. `.js`, `.sh`) can be referenced as well.
+Suppose if `foo.md` or `bar.ts` was changed, we can simply run the `markdown-interpolate` CLI to automatically update `README.md`.
 
 ## CLI
 
@@ -69,18 +67,14 @@ Other usage notes:
 $ npx markdown-interpolate --help
 
   Description
-    Interpolate files or the output of scripts into Markdown
+    Interpolate the output of shell commands into Markdown
 
   Usage
     $ markdown-interpolate <pattern> [options]
 
   Options
-    -b, --base       Base directory to resolve files or scripts
     -v, --version    Displays current version
     -h, --help       Displays this message
-
-  Examples
-    $ markdown-interpolate --root scripts
 
 ```
 
