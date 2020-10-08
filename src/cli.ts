@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import * as sade from 'sade'
 
-import { markdownInterpolateFiles } from './markdown-interpolate-files'
+import { markdownInterpolate } from './markdown-interpolate'
 
-sade('markdown-interpolate-files <pattern>', true)
+sade('markdown-interpolate <pattern>', true)
   .describe('Interpolate files or the output of scripts into Markdown')
   .option('-b, --base', 'Base directory to resolve files or scripts')
   .example('--base scripts')
@@ -14,12 +14,12 @@ sade('markdown-interpolate-files <pattern>', true)
     }
   ) {
     try {
-      await markdownInterpolateFiles(
+      await markdownInterpolate(
         pattern,
         typeof options.base === 'undefined' ? null : options.base
       )
     } catch (error) {
-      console.error(`markdown-interpolate-files: ${error.message}`) // eslint-disable-line no-console
+      console.error(`markdown-interpolate: ${error.message}`) // eslint-disable-line no-console
     }
   })
   .parse(process.argv)

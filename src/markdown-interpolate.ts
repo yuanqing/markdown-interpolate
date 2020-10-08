@@ -2,7 +2,7 @@ import * as globby from 'globby'
 
 import { interpolateFiles } from './interpolate-files'
 
-export async function markdownInterpolateFiles(
+export async function markdownInterpolate(
   pattern: string,
   baseDirectory: null | string
 ): Promise<void> {

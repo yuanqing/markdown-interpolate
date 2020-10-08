@@ -26,13 +26,13 @@ export async function interpolateFiles(
       baseDirectory === null
         ? path.resolve(path.dirname(file), match[3])
         : path.resolve(baseDirectory, match[3])
-    if (match[2] === 'include') {
-      result.push(
-        trimTrailingNewline(await fs.readFile(fileToInterpolate, 'utf8'))
+    result.push(
+      trimTrailingNewline(
+        match[2] === 'include'
+          ? await fs.readFile(fileToInterpolate, 'utf8')
+          : await executeFile(fileToInterpolate)
       )
-    } else {
-      result.push(trimTrailingNewline(await executeFile(fileToInterpolate)))
-    }
+    )
     result.push('\n')
     result.push(match[4])
     startIndex = match.index + match[0].length

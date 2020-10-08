@@ -1,5 +1,5 @@
 {
-  "name": "markdown-interpolate-files",
+  "name": "markdown-interpolate",
   "version": "0.0.3",
   "description": "Interpolate files or the output of scripts into Markdown",
   "keywords": [
@@ -11,13 +11,13 @@
   "author": "Yuan Qing Lim",
   "repository": {
     "type": "git",
-    "url": "git://github.com/yuanqing/markdown-interpolate-files.git"
+    "url": "git://github.com/yuanqing/markdown-interpolate.git"
   },
   "files": [
     "lib"
   ],
   "bin": {
-    "markdown-interpolate-files": "lib/cli.js"
+    "markdown-interpolate": "lib/cli.js"
   },
   "main": "lib/index.js",
   "scripts": {

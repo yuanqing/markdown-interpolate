@@ -1,4 +1,4 @@
-# markdown-interpolate-files [![npm Version](https://img.shields.io/npm/v/markdown-interpolate-files?cacheSeconds=1800)](https://www.npmjs.com/package/markdown-interpolate-files) [![build](https://github.com/yuanqing/markdown-interpolate-files/workflows/build/badge.svg)](https://github.com/yuanqing/markdown-interpolate-files/actions?query=workflow%3Abuild)
+# markdown-interpolate [![npm Version](https://img.shields.io/npm/v/markdown-interpolate?cacheSeconds=1800)](https://www.npmjs.com/package/markdown-interpolate) [![build](https://github.com/yuanqing/markdown-interpolate/workflows/build/badge.svg)](https://github.com/yuanqing/markdown-interpolate/actions?query=workflow%3Abuild)
 
 > Interpolate files or the output of scripts into Markdown
 
@@ -34,7 +34,7 @@ main()
 Do:
 
 ```
-$ npx markdown-interpolate-files README.md
+$ npx markdown-interpolate README.md
 ```
 
 This will:
@@ -56,7 +56,7 @@ bar
 <!-- end -->
 ```
 
-Run the `markdown-interpolate-files` CLI again to update the content between each pair of opening/closing HTML comments.
+Run the `markdown-interpolate` CLI again to update the content between each pair of opening/closing HTML comments.
 
 Other usage notes:
 
@@ -66,13 +66,13 @@ Other usage notes:
 ## CLI
 
 ```
-$ npx markdown-interpolate-files --help
+$ npx markdown-interpolate --help
 
   Description
     Interpolate files or the output of scripts into Markdown
 
   Usage
-    $ markdown-interpolate-files <pattern> [options]
+    $ markdown-interpolate <pattern> [options]
 
   Options
     -b, --base       Base directory to resolve files or scripts
@@ -80,7 +80,7 @@ $ npx markdown-interpolate-files --help
     -h, --help       Displays this message
 
   Examples
-    $ markdown-interpolate-files --root scripts
+    $ markdown-interpolate --root scripts
 
 ```
 
