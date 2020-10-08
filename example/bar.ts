@@ -1,4 +1,4 @@
-async function main () {
-  console.log('bar')
+async function main() {
+  console.log('# bar')
 }
 main()

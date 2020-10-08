@@ -1,9 +1,11 @@
 # Example
 
-<!-- include: foo.md -->
+<!-- markdown-interpolate: cat foo.md -->
 foo
 <!-- end -->
 
-<!-- execute: bar.ts -->
-bar
-<!-- end -->
+<!-- ```md markdown-interpolate: ts-node bar.ts -->
+```md
+# bar
+```
+<!-- ``` end -->
