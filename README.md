@@ -2,7 +2,7 @@
 
 > Interpolate the output of shell commands into Markdown
 
-- Useful for inlining entire files (eg. `cat foo.md`) or inserting dynamically-generated documentation (eg. `ts-node bar.ts`) into Markdown
+- Useful for inlining entire files (eg. `cat file.md`) or inserting dynamically-generated documentation (eg. `node script.js`) into Markdown
 
 ## Usage
 
@@ -11,26 +11,23 @@ Given the following toy `README.md` file:
 ```md
 # Example
 
-<!-- markdown-interpolate: cat foo.md -->
+<!-- markdown-interpolate: cat file.md -->
 <!-- end -->
 
-<!-- ```md markdown-interpolate: ts-node bar.ts -->
+<!-- ```json markdown-interpolate: node script.js -->
 <!-- ``` end -->
 ```
 
-…with the following `foo.md`:
+…with the following `file.md`:
 
 ```md
 foo
 ```
 
-…and `bar.ts`:
+…and `script.js`:
 
-```ts
-async function main () {
-  console.log('bar')
-}
-main()
+```js
+console.log('{ "bar": 42 }')
 ```
 
 Do:
@@ -39,28 +36,36 @@ Do:
 $ npx markdown-interpolate README.md
 ```
 
-This will execute each shell command marked by `markdown-interpolate`, and interpolate their `stdout` between each pair of `markdown-interpolate` and `end` HTML comments. `README.md` will then be updated as follows:
+This will execute the shell commands marked by each **`markdown-interpolate:`** HTML comment, and interpolate the `stdout` between each corresponding pair of **`markdown-interpolate:`** and **`end`** HTML comments.
+
+Our `README.md` will then be as follows:
 
 ````md
 # Example
 
-<!-- markdown-interpolate: cat foo.md -->
+<!-- markdown-interpolate: cat file.md -->
 foo
 <!-- end -->
 
-<!-- ``` markdown-interpolate: ts-node bar.ts -->
-```
-bar
+<!-- ```json markdown-interpolate: node script.js -->
+```json
+{ "bar": 42 }
 ```
 <!-- ``` end -->
 ````
 
 See that:
 
-- To include a prefix before the shell command’s `stdout`, specify a string (eg. <code>```</code>) before `markdown-interpolate`.
-- To include a suffix after the shell command’s `stdout`, specify a string (eg. <code>```</code>) before `end`.
+- Specify a string (eg. <code>```json</code>) before **`markdown-interpolate:`** to insert it *before* the shell command’s `stdout`.
+- Specify a string (eg. <code>```</code>) before **`end`** to insert it *after* the shell command’s `stdout`.
 
-Suppose if `foo.md` or `bar.ts` was changed, simply run the `markdown-interpolate` CLI again to automatically update `README.md`.
+If `file.md` or `script.js` was changed, simply execute `npx markdown-interpolate README.md` again to automatically update `README.md`.
+
+## Installation
+
+```
+$ npm install --dev markdown-interpolate
+```
 
 ## CLI
 

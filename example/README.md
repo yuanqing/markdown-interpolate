@@ -1,11 +1,11 @@
 # Example
 
-<!-- markdown-interpolate: cat foo.md -->
+<!-- markdown-interpolate: cat file.md -->
 foo
 <!-- end -->
 
-<!-- ``` markdown-interpolate: ts-node bar.ts -->
-```
-bar
+<!-- ```json markdown-interpolate: node script.js -->
+```json
+{ "bar": 42 }
 ```
 <!-- ``` end -->
