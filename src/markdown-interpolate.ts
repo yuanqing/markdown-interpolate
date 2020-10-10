@@ -11,7 +11,6 @@ export async function markdownInterpolate(pattern: string): Promise<void> {
   for (const file of files) {
     await interpolateFiles(file)
   }
-  return
 }
 
 const interpolateRegex = /(<!-- ?(?:([^\n]*?) )?markdown-interpolate: ?([^\n]*?) ?-->\n)[\S\s]*?(<!-- ?(?:([^\n]*?) )?end ?-->)/g
