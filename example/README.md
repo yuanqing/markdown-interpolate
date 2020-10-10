@@ -4,8 +4,8 @@
 foo
 <!-- end -->
 
-<!-- ```md markdown-interpolate: ts-node bar.ts -->
-```md
-# bar
+<!-- ``` markdown-interpolate: ts-node bar.ts -->
+```
+bar
 ```
 <!-- ``` end -->
