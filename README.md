@@ -2,6 +2,8 @@
 
 > Interpolate the output of shell commands into Markdown
 
+- Useful for inlining entire files (eg. `cat foo.md`) or inserting dynamically-generated documentation (eg. `ts-node bar.ts`) into Markdown
+
 ## Usage
 
 Given the following toy `README.md` file:
@@ -26,7 +28,7 @@ foo
 
 ```ts
 async function main () {
-  console.log('# bar')
+  console.log('bar')
 }
 main()
 ```
@@ -37,9 +39,7 @@ Do:
 $ npx markdown-interpolate README.md
 ```
 
-This will execute the shell commands that follow each `markdown-interpolate:` comment in `README.md`, and insert their `stdout` between the respective pair of HTML comments.
-
-So, our `README.md` will be updated as follows:
+This will execute each shell command marked by `markdown-interpolate`, and interpolate their `stdout` between each pair of `markdown-interpolate` and `end` HTML comments. `README.md` will then be updated as follows:
 
 ````md
 # Example
@@ -48,18 +48,19 @@ So, our `README.md` will be updated as follows:
 foo
 <!-- end -->
 
-<!-- ```md markdown-interpolate: ts-node bar.ts -->
-```md
-# bar
+<!-- ``` markdown-interpolate: ts-node bar.ts -->
+```
+bar
 ```
 <!-- ``` end -->
 ````
 
 See that:
 
-- To include a prefix/suffix line before/after the shell command’s `stdout`, specify a string before the `markdown-interpolate:` and corresponding `end` comment.
+- To include a prefix before the shell command’s `stdout`, specify a string (eg. <code>```</code>) before `markdown-interpolate`.
+- To include a suffix after the shell command’s `stdout`, specify a string (eg. <code>```</code>) before `end`.
 
-Suppose if `foo.md` or `bar.ts` was changed, we can simply run the `markdown-interpolate` CLI to automatically update `README.md`.
+Suppose if `foo.md` or `bar.ts` was changed, simply run the `markdown-interpolate` CLI again to automatically update `README.md`.
 
 ## CLI
 
