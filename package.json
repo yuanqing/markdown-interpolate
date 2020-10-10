@@ -23,8 +23,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf '*.log' .nyc_output coverage lib",
-    "fix": "eslint --fix 'src/**/*.ts' && prettier --loglevel error --write '*.json'",
-    "lint": "eslint 'src/**/*.ts'",
+    "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "lint": "eslint '{src,test}/**/*.ts'",
     "prepublishOnly": "yarn run clean && yarn run build",
     "reset": "yarn run clean && rimraf node_modules yarn.lock && yarn install",
     "start": "ts-node src/cli.ts 'example/README.md'",
