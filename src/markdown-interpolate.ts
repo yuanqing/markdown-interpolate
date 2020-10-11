@@ -31,19 +31,27 @@ export async function interpolateFiles(file: string): Promise<void> {
     result.push(string.slice(startIndex, match.index))
     result.push(match[1])
     if (typeof match[2] !== 'undefined') {
-      result.push(`${match[2]}\n`)
+      result.push(ensureTrailingNewline(renderSpecialCharacters(match[2])))
     }
     result.push(
       `${ensureTrailingNewline(await executeCommand(match[3], directory))}`
     )
     if (typeof match[5] !== 'undefined') {
-      result.push(`${match[5]}\n`)
+      result.push(ensureTrailingNewline(renderSpecialCharacters(match[5])))
     }
     result.push(match[4])
     startIndex = match.index + match[0].length
   }
   result.push(string.slice(startIndex))
   await fs.writeFile(file, result.join(''))
+}
+
+export async function executeCommand(
+  command: string,
+  cwd: string
+): Promise<string> {
+  const { stdout } = await execa(command, { cwd, shell: true })
+  return stdout
 }
 
 function ensureTrailingNewline(string: string): string {
@@ -53,10 +61,6 @@ function ensureTrailingNewline(string: string): string {
   return `${string}\n`
 }
 
-export async function executeCommand(
-  command: string,
-  cwd: string
-): Promise<string> {
-  const { stdout } = await execa(command, { cwd, shell: true })
-  return stdout
+function renderSpecialCharacters(string: string): string {
+  return string.replace(/\\n/g, '\n').replace(/\\t/g, '\t')
 }
