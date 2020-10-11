@@ -34,7 +34,7 @@ export async function interpolateFiles(file: string): Promise<void> {
       result.push(`${match[2]}\n`)
     }
     result.push(
-      `${trimTrailingNewlines(await executeCommand(match[3], directory))}\n`
+      `${ensureTrailingNewline(await executeCommand(match[3], directory))}`
     )
     if (typeof match[5] !== 'undefined') {
       result.push(`${match[5]}\n`)
@@ -46,8 +46,11 @@ export async function interpolateFiles(file: string): Promise<void> {
   await fs.writeFile(file, result.join(''))
 }
 
-function trimTrailingNewlines(string: string): string {
-  return string.replace(/\n+$/, '')
+function ensureTrailingNewline(string: string): string {
+  if (string[string.length - 1] === '\n') {
+    return string
+  }
+  return `${string}\n`
 }
 
 export async function executeCommand(
