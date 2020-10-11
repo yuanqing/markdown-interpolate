@@ -1,6 +1,6 @@
 {
   "name": "markdown-interpolate",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Interpolate the output of shell commands into Markdown",
   "keywords": [
     "docs",
