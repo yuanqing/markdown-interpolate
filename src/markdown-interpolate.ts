@@ -33,9 +33,7 @@ export async function interpolateFiles(file: string): Promise<void> {
     if (typeof match[2] !== 'undefined') {
       result.push(ensureTrailingNewline(renderSpecialCharacters(match[2])))
     }
-    result.push(
-      `${ensureTrailingNewline(await executeCommand(match[3], directory))}`
-    )
+    result.push(`${await executeCommand(match[3], directory)}\n`)
     if (typeof match[5] !== 'undefined') {
       result.push(ensureTrailingNewline(renderSpecialCharacters(match[5])))
     }
