@@ -4,7 +4,9 @@
 
 - Useful for inlining entire files (eg. `cat file.md`) or inserting dynamically-generated documentation (eg. `node script.js`) into Markdown
 
-## Usage
+## Quick start
+
+*Requires [Node.js](https://nodejs.org/).*
 
 Given the following toy `README.md` file:
 
@@ -61,16 +63,9 @@ See that:
 
 If `file.md` or `script.js` was changed, simply execute `npx markdown-interpolate README.md` again to automatically update `README.md`.
 
-## Installation
+## Usage
 
 ```
-$ npm install --dev markdown-interpolate
-```
-
-## CLI
-
-```
-$ npx markdown-interpolate --help
 
   Description
     Interpolate the output of shell commands into Markdown
@@ -82,6 +77,12 @@ $ npx markdown-interpolate --help
     -v, --version    Displays current version
     -h, --help       Displays this message
 
+```
+
+## Installation
+
+```
+$ npm install --dev markdown-interpolate
 ```
 
 ## License
